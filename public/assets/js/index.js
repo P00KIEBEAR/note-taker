@@ -57,7 +57,7 @@ const renderActiveNote = () => {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
-    noteText.value = activeNote.title;
+    noteText.value = activeNote.text;
   } else {
     noteTitle.value = '';
     noteText.value = '';
@@ -128,7 +128,7 @@ const renderNoteList = async (notes) => {
     const liEl = document.createElement('li');
     liEl.classList.add('list-group-item');
 
-    const spanEl = document.createElement('span');
+    const spanEl = document.createElement('p');
     spanEl.innerText = text;
     spanEl.addEventListener('click', handleNoteView);
 

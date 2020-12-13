@@ -4,7 +4,7 @@ const notes = require('../db/db.json');
 const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-uuidv4();
+
 
 
 router.get('/notes', (req, res) => {
@@ -16,7 +16,7 @@ router.get('/notes', (req, res) => {
 
 router.post('/notes', (req, res) => {
   //db.getNotes(body, notes)
-  const note = req.body
+  const note = { ...req.body, id: uuidv4() }
   notes.push(note)
   fs.writeFileSync(
     path.join(__dirname, '../db/db.json'),
@@ -28,7 +28,19 @@ router.post('/notes', (req, res) => {
 
 })
 
+router.delete('/notes', (req, res) => {
+  //db.getNotes(body, notes)
 
+  notes.delete(res)
+  fs.writeFileSync(
+    path.join(__dirname, '../db/db.json'),
+    JSON.stringify(notes, null, 2)
+  );
+
+  res.json(notes)
+  // .catch((err) => res.status(500).json(err))
+
+})
 module.exports = router
 
 
