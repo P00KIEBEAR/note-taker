@@ -13,11 +13,11 @@ router.get('/notes', (req, res) => {
 });
 
 
-router.delete('/notes', (req, res) => {
+router.delete(`/notes/:id`, (req, res) => {
   //db.getNotes(body, notes)
-  console.log(res.body, JSON.stringify(res.body))
+  console.log(req.params)
   // unsure how this is not working I cant find id still needs work
-  notes = notes.filter(note => note.id !== res.id);
+  notes = notes.filter(note => note.id !== req.params.id);
   fs.writeFileSync(
     path.join(__dirname, '../db/db.json'),
     JSON.stringify(notes, null, 2)
